@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: person("Tom", "Cooper", email = "tomcooper@tec8.net", role = c("aut", "cre"))
 Author: Tom Cooper
 Maintainer: Tom Cooper <tomcooper@tec8.net>
-Description: Creates timelines and maps based o NOAA Earthquake data
+Description: Creates timelines and maps based on NOAA Earthquake data.
 Depends: R (>= 3.2.3)
 License: GPL-3 
 Encoding: UTF-8

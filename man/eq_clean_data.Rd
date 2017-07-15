@@ -16,6 +16,8 @@ This function returns a dataframe with latitude and longitude columns as numeric
 This is a function the converts the latitude and longitude from NOAA earthquake data from character to numeric.
 }
 \examples{
+\dontrun{
 eq_clean_data(mydata)
+}
 
 }

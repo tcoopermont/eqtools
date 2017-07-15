@@ -16,6 +16,8 @@ This function returns a dataframe with location_name column as formated as title
 This is a function the converts the location_name from NOAA earthquake data from uppercase to title case and remove the country from location_name. (removes everything up to the last colon character.)
 }
 \examples{
+\dontrun{
 eq_location_clean(mydata)
+}
 
 }
