@@ -8,7 +8,9 @@ library(tools)
 #' @return This function returns a dataframe with latitude and longitude columns as numeric type.
 #'
 #' @examples
+#' \dontrun{
 #' eq_clean_data(mydata)
+#' }
 #'
 #' @importFrom dplyr mutate
 #'
@@ -28,7 +30,9 @@ eq_clean_data <- function(adf) {
 #' @return This function returns a dataframe with location_name column as formated as title case without the country name. 
 #'
 #' @examples
+#' \dontrun{
 #' eq_location_clean(mydata)
+#' }
 #'
 #' @importFrom dplyr mutate
 #'
