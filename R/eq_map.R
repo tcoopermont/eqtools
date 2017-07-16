@@ -15,11 +15,12 @@
 #' }
 #' 
 #' @importFrom leaflet addTiles addCircleMarkers
+#' @importFrom magrittr %>%
 #' 
 #' @export
 eq_map <- function(adf,annot_col){
 
-leaflet() %>% leaflet::addTiles( urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>% 
+leaflet::leaflet() %>% leaflet::addTiles( urlTemplate = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png") %>% 
   leaflet::addCircleMarkers(data = adf,
                  radius = ~ EQ_PRIMARY,
                  weight = 1,
