@@ -1,6 +1,7 @@
 
 library(eqtools)
 library(readr)
+library(leaflet)
 
 test_that("eq_map returns a object with class leaflet",{
    adf <- read_delim(  system.file("extdata", "signif-july-2017.txt.gz", package = "eqtools"),delim = "\t")
