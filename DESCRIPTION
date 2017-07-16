@@ -9,7 +9,7 @@ Depends: R (>= 3.2.3)
 License: GPL-3 
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr,tools
+Imports: dplyr,tools,leaflet
 Suggests: knitr,
     rmarkdown,
     testthat
