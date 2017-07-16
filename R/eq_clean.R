@@ -22,7 +22,7 @@ eq_clean_data <- function(adf) {
         )
 }
 
-#' eq_location_clean
+#' eq_clean_location
 #' 
 #' This is a function the converts the location_name from NOAA earthquake data from uppercase to title case and remove the country from location_name. (removes everything up to the last colon character.)
 #' @param adf a dataframe containing NOAA earthquake data
@@ -31,7 +31,7 @@ eq_clean_data <- function(adf) {
 #'
 #' @examples
 #' \dontrun{
-#' eq_location_clean(mydata)
+#' eq_clean_location(mydata)
 #' }
 #'
 #' @importFrom dplyr mutate
@@ -40,7 +40,7 @@ eq_clean_data <- function(adf) {
 #' @importFrom tools toTitleCase
 #'
 #' @export
-eq_location_clean <- function(adf) {
+eq_clean_location <- function(adf) {
   dplyr::mutate_(adf,LOCATION_NAME = ~ tools::toTitleCase(tolower(
              sub("^.+:\\s+" ,"",LOCATION_NAME,perl = TRUE))))
 
