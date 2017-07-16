@@ -2,10 +2,12 @@ library(dplyr)
 library(tools)
 #' eq_clean_data
 #' 
-#' This is a function the converts the latitude and longitude from NOAA earthquake data from character to numeric.
+#' This is a function the converts the latitude and longitude from NOAA earthquake data from 
+#'    character to numeric and creates date column from YEAR,MONTH,DAY.
 #' @param adf a dataframe containing NOAA earthquake data
 #'
-#' @return This function returns a dataframe with latitude and longitude columns as numeric type.
+#' @return This function returns a dataframe with latitude and longitude columns as numeric type
+#'    and a  additional column date
 #'
 #' @examples
 #' \dontrun{
@@ -18,7 +20,7 @@ library(tools)
 eq_clean_data <- function(adf) {
   dplyr::mutate_(adf, LATITUDE =  ~ as.numeric(LATITUDE),
               LONGITUDE = ~ as.numeric(LONGITUDE),
-              date = ~ as.Date(paste(YEAR,MONTH,DAY,sep="-"),"%Y-%m-%d") 
+              DATE = ~ as.Date(paste(YEAR,MONTH,DAY,sep="-"),"%Y-%m-%d") 
         )
 }
 

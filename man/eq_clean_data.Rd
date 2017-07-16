@@ -10,10 +10,12 @@ eq_clean_data(adf)
 \item{adf}{a dataframe containing NOAA earthquake data}
 }
 \value{
-This function returns a dataframe with latitude and longitude columns as numeric type.
+This function returns a dataframe with latitude and longitude columns as numeric type
+   and a  additional column date
 }
 \description{
-This is a function the converts the latitude and longitude from NOAA earthquake data from character to numeric.
+This is a function the converts the latitude and longitude from NOAA earthquake data from 
+   character to numeric and creates date column from YEAR,MONTH,DAY.
 }
 \examples{
 \dontrun{

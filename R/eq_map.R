@@ -7,7 +7,7 @@
 #'    contains the "pop up" text for the data points.
 #'    This "pop text" can be generated using the function eq_create_label.
 #' 
-#' @return This function returns a !!need to fill
+#' @return This function returns a  leaflet map object
 #' 
 #' @examples
 #' \dontrun{

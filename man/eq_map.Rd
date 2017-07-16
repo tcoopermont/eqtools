@@ -14,7 +14,7 @@ contains the "pop up" text for the data points.
 This "pop text" can be generated using the function eq_create_label.}
 }
 \value{
-This function returns a !!need to fill
+This function returns a  leaflet map object
 }
 \description{
 This function generates a leaflet map, give NOAA earthquake data.
