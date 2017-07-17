@@ -23,14 +23,22 @@ library(grid)
 #        gTree(children = gList(med, lower, upper))
 #}
 draw_panel_function <- function(data, panel_scales, coord) {
-         str(data)
-         str(panel_scales)
+         #str(data)
+         #str(panel_scales)
          # pull out the top n_max by magnitude - for annotation
+	 one_max <- data$n_max[1]
+	 if(!is.na(one_max)){
+             data <- mutate(data, size = as.numeric(size)) %>%
+	      arrange(size) %>%
+	      slice(1:one_max)
+	         
+
+	 } 
          coords <- coord$data
          coords <- coord$transform(data, panel_scales) #%>%
                 #mutate(xmin = rescale(xmin, from = panel_scales$x.range),
                 #       xmax = rescale(xmax, from = panel_scales$x.range))
-         str(coords) 
+         #str(coords) 
                        
          #should the length come in as a parameter?
          connLine = segmentsGrob(coords$x,coords$y,coords$x,coords$y + 0.07)
@@ -43,7 +51,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
 GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
                          required_aes = c("x","label"),
                          default_aes = aes(shape = 19, lwd = 2,colour = "black",
-                                           fill = "black",alpha = 0.9,stroke = 1),
+                                           fill = "black",alpha = 0.9,stroke = 1,n_max = NA),
 
                          draw_key = draw_key_point,
                          #draw_key = function(data, params, size) 
@@ -65,9 +73,10 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
 #' @param mapping Set of aesthetic mappings created by ‘aes’. Can be inherited from 
 #'      upper levels of the plot.
 #'
-#' @param data: The data to be displayed in this layer. Can be NULL, data.frame or function
+#' @param data The data to be displayed in this layer. Can be NULL, data.frame or function
 #' 
-#' @details: aes parameters act similar to `geom_label`
+#' @details aes parameters act similar to `geom_label`
+#'     aes n_max max number of labels sorted by size 
 #'
 #' @aesthetics
 #' * length

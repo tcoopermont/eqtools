@@ -23,8 +23,8 @@ library(grid)
 #        gTree(children = gList(med, lower, upper))
 #}
 draw_panel_function <- function(data, panel_scales, coord) {
-    str(data)
-    str(panel_scales)
+    #str(data)
+    #str(panel_scales)
     #getting warning: "Using size for a discrete variable is not advised "
     #coords$data <- dplyr::mutate(coords$data,~ size = as.numeric(size))
     #try and filter the data by min/max year
@@ -32,7 +32,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
     coords <- coord$transform(data, panel_scales) #%>%
            #mutate(xmin = rescale(xmin, from = panel_scales$x.range),
            #       xmax = rescale(xmax, from = panel_scales$x.range))
-    str(coords) 
+    #str(coords) 
     
     datePoint = pointsGrob(
 	   x = coords$x,

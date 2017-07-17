@@ -1,7 +1,7 @@
 ---
 title: "Intro to Eartquake Tools"
 author: "Tom Cooper"
-date: "`r Sys.Date()`"
+date: "2017-07-16"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Intro to Eartquake Tools}
@@ -24,37 +24,102 @@ The entire dataset can be download by clicking on the link: "Download entire sig
 
 ### Data: NOAA significant earthquake data 
 
-```{r, echo = TRUE, eval = TRUE, load_data}
+
+```r
      eqdata <- readr::read_delim(  system.file("extdata",
                           "signif-july-2017.txt.gz",
 			   package = "eqtools"),delim = "\t")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   .default = col_integer(),
+##   FLAG_TSUNAMI = col_character(),
+##   SECOND = col_character(),
+##   EQ_PRIMARY = col_character(),
+##   EQ_MAG_MW = col_character(),
+##   EQ_MAG_MS = col_character(),
+##   EQ_MAG_MB = col_character(),
+##   EQ_MAG_ML = col_double(),
+##   EQ_MAG_MFA = col_character(),
+##   EQ_MAG_UNK = col_character(),
+##   COUNTRY = col_character(),
+##   STATE = col_character(),
+##   LOCATION_NAME = col_character(),
+##   LATITUDE = col_character(),
+##   LONGITUDE = col_character(),
+##   DEATHS = col_character(),
+##   MISSING = col_character(),
+##   INJURIES = col_character(),
+##   DAMAGE_MILLIONS_DOLLARS = col_character(),
+##   TOTAL_DEATHS = col_character(),
+##   TOTAL_MISSING = col_character()
+##   # ... with 2 more columns
+## )
+```
+
+```
+## See spec(...) for full column specifications.
+```
+
+```r
     dim(eqdata)
+```
+
+```
+## [1] 5952   47
 ```
 
 ### Cleaning tools
 
 eq_clean_data convert LATITUDE and LONGITUDE to numeric
 
-```{r, echo = TRUE, eval = TRUE, clean_data}
+
+```r
     library(eqtools)
     str(eqdata$LATITUDE)
+```
+
+```
+##  chr [1:5952] "  31.100" "  38.000" "  35.683" "  36.400" ...
+```
+
+```r
     eq_data_clean <- eq_clean_data(eqdata)
     str(eq_data_clean$LATITUDE)
 ```
 
+```
+##  num [1:5952] 31.1 38 35.7 36.4 31.5 ...
+```
+
 eq_clean_location removes country from LOCATION_NAME and converts it to title case
 
-```{r, echo = TRUE, eval = TRUE, clean_location}
+
+```r
     eqdata$LOCATION_NAME[1]
+```
+
+```
+## [1] "JORDAN:  BAB-A-DARAA,AL-KARAK"
+```
+
+```r
     eq_data_ready <- eq_clean_location(eq_data_clean)
     eq_clean$LOCATION_NAME[1]
+```
+
+```
+## [1] "Bab-a-Daraa,al-Karak"
 ```
 
 ### Plotting Tools
 
 geom_timeline() creates a timeline plot of eathquakes by year
 
-```{r, echo = TRUE, eval = TRUE, timeline_plot}
+
+```r
     library(dplyr)
     library(ggplot2)
     library(grid)
@@ -69,9 +134,12 @@ geom_timeline() creates a timeline plot of eathquakes by year
   geom_timeline(aes(size = EQ_PRIMARY))
 ```
 
+![plot of chunk timeline_plot](figure/timeline_plot-1.png)
+
 geom_timeline_label() adds labels to the geom_timeline plot
 
-```{r, echo = TRUE, eval = TRUE, timeline_plot_annot}
+
+```r
      ggplot(eq_us_mex_data,aes(x = YEAR, y = 1,
          xmin = minYear,xmax = maxYear,
          )) +
@@ -79,22 +147,46 @@ geom_timeline_label() adds labels to the geom_timeline plot
   geom_timeline_label(aes(label = LOCATION_NAME,n_max = 10))
 ```
 
+![plot of chunk timeline_plot_annot](figure/timeline_plot_annot-1.png)
+
 ### Mapping Tools
 
 eq_map creates a leaflet map
-```{r, echo = TRUE, eval = TRUE, earthquake_map}
+
+```r
       library(leaflet)
       
       eq_map(eq_us_mex_data,annot_col = "DATE")
+```
 
+```
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+```
+
+```
+## Warning in normalizePath(f2): path[1]="./webshot35d64e7fd70.png": No such
+## file or directory
+```
+
+```
+## Warning in file(con, "rb"): cannot open file './webshot35d64e7fd70.png': No
+## such file or directory
+```
+
+```
+## Error in file(con, "rb"): cannot open the connection
 ```
 
 eq_create_label() formats information to be used in a web popup
 
-```{r, echo = TRUE, eval = TRUE, earthquake_labels}
+
+```r
   popup_labels <- eq_create_label(adf) 
   paste(popup_labels[1],"\n")
+```
 
+```
+## [1] "<b>Location</b> JORDAN:  BAB-A-DARAA,AL-KARAK <br /> <b>Magnitude:</b>  7.3 <br /> <b>Total deaths:</b> NA <br /> \n"
 ```
 
 
