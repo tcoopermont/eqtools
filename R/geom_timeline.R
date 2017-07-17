@@ -83,7 +83,6 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #'
 #' @examples
 #' \dontrun{
-#' geom_timeline(
 #' ggplot(quakesFiltered,aes(x = YEAR, y = 1,
 #'         xmin = minYear,xmax = maxYear,
 #'         )) +
