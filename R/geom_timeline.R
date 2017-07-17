@@ -69,7 +69,30 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #},
                          draw_panel = draw_panel_function
                          )
-
+#' geom_timeline
+#'
+#' This function generates a timeline plot with years as y axis and individual earthquake 
+#'    dates as points on the x axis.
+#' 
+#' @param mapping Set of aesthetic mappings created by ‘aes’. Can be inherited from 
+#'      upper levels of the plot.
+#'
+#' @param data: The data to be displayed in this layer. Can be NULL, data.frame or function
+#' 
+#' @details: aes parameters act similar to `geom_point`
+#'
+#' @examples
+#' \dontrun{
+#' geom_timeline(
+#' ggplot(quakesFiltered,aes(x = YEAR, y = 1,
+#'         xmin = minYear,xmax = maxYear,
+#'         )) +
+#'  geom_timeline(aes(size = EQ_PRIMARY))
+#' }
+#'
+# ??@importFrom grid pointsGrob segmentsGrob
+#'
+#' @export
 geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity", 
                            position = "identity", show.legend = NA, 
                            na.rm = FALSE, inherit.aes = TRUE, ...) {

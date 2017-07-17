@@ -56,6 +56,33 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
                          draw_panel = draw_panel_function
                          )
 
+#' geom_timeline_label
+#'
+#' This function generates annotation to accompany `geom_timeline` plot objects.
+#'    The name of the earthquake location is shown above the timeline point and a
+#'    line connection the name with the point is drawn.
+#' 
+#' @param mapping Set of aesthetic mappings created by ‘aes’. Can be inherited from 
+#'      upper levels of the plot.
+#'
+#' @param data: The data to be displayed in this layer. Can be NULL, data.frame or function
+#' 
+#' @details: aes parameters act similar to `geom_label`
+#'
+#' @aesthetics
+#' * length
+#'
+#' @examples
+#' \dontrun{
+#' ggplot(quakesFiltered,aes(x = YEAR, y = 1,
+#'         xmin = minYear,xmax = maxYear)) +
+#'  geom_timeline(aes(size = EQ_PRIMARY)) +
+#'  geom_timeline_label(aes(size = EQ_PRIMARY)) +
+#' }
+#'
+# ??@importFrom grid textGrob segmentsGrob
+#'
+#' @export
 geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity", 
                            position = "identity", show.legend = NA, 
                            na.rm = FALSE, inherit.aes = TRUE, ...) {
