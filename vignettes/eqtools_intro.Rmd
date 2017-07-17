@@ -4,7 +4,7 @@ author: "Tom Cooper"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Intro to Eartquake Tools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,6 +21,39 @@ The entire dataset can be download by clicking on the link: "Download entire sig
 - Functions to clean the data to prepare for 
 - Geoms to create timeline plots
 - Functions to create interactive html maps 
+
+### Data: NOAA significant earthquake data 
+
+```{r, echo = TRUE, eval = TRUE, load_data}
+     eqdata <- readr::read_delim(  system.file("extdata",
+                          "signif-july-2017.txt.gz",
+			   package = "eqtools"),delim = "\t")
+    dim(eqdata)
+```
+
+### Cleaning tools
+
+```{r, echo = TRUE, eval = TRUE, clean_data}
+    library(eqtools)
+    str(eqdata$LATITUDE)
+    eq_clean <- eq_clean_data(eqdata)
+    str(eq_clean$LATITUDE)
+```
+
+```{r, echo = TRUE, eval = TRUE, clean_location}
+    eqdata$LOCATION_NAME[1]
+    eq_clean <- eq_clean_location(eqdata)
+    eq_clean$LOCATION_NAME[1]
+```
+
+### Plotting Tools
+library(dplyr)
+```{r, echo = TRUE, eval = TRUE, timeline_plot}
+    eq_us_mex <- dplyr::mutate(eq_clean)
+    aplot <- ggplot(eq_us_mex,aes(x = YEAR, y = 1,
+         xmin = minYear,xmax = maxYear,
+         )) +
+  geom_timeline(aes(size = EQ_PRIMARY))
 
 ## Vignette Info
 
