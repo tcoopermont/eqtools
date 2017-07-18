@@ -134,7 +134,7 @@ geom_timeline() creates a timeline plot of eathquakes by year
   geom_timeline(aes(size = EQ_PRIMARY))
 ```
 
-![plot of chunk timeline_plot](figure/timeline_plot-1.png)
+![plot of chunk timeline_plot](../figure/timeline_plot-1.png)
 
 geom_timeline_label() adds labels to the geom_timeline plot
 
@@ -147,7 +147,7 @@ geom_timeline_label() adds labels to the geom_timeline plot
   geom_timeline_label(aes(label = LOCATION_NAME,n_max = 10))
 ```
 
-![plot of chunk timeline_plot_annot](figure/timeline_plot_annot-1.png)
+![plot of chunk timeline_plot_annot](../figure/timeline_plot_annot-1.png)
 
 ### Mapping Tools
 
