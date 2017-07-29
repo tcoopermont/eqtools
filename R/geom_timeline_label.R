@@ -71,11 +71,8 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
 #'    The name of the earthquake location is shown above the timeline point and a
 #'    line connection the name with the point is drawn.
 #' 
-#' @param mapping Set of aesthetic mappings created by ‘aes’. Can be inherited from 
-#'      upper levels of the plot.
+#' @inheritParams geom_timeline
 #'
-#' @param data The data to be displayed in this layer. Can be NULL, data.frame or function
-#' 
 #' @details aes parameters act similar to `geom_label`
 #'     aes n_max max number of labels sorted by size 
 #'

@@ -12,7 +12,20 @@ geom_timeline(mapping = NULL, data = NULL, stat = "identity",
 \item{mapping}{Set of aesthetic mappings created by ‘aes’. Can be inherited from 
 upper levels of the plot.}
 
-\item{data:}{The data to be displayed in this layer. Can be NULL, data.frame or function}
+\item{data}{The data to be displayed in this layer. Can be NULL, data.frame or function}
+
+\item{stat}{The statistical transformation to use on the data for this layer}
+
+\item{position}{Position adjustment, either as a string, or the result of a
+call to a position adjustment function.}
+
+\item{show.legend}{logical. Should this layer be included in the legends?}
+
+\item{na.rm}{If ‘FALSE’, the default, missing values are removed with a
+warning. If ‘TRUE’, missing values are silently removed.}
+
+\item{inherit.aes}{If ‘FALSE’, overrides the default aesthetics, rather than
+combining with them.}
 }
 \description{
 This function generates a timeline plot with years as y axis and individual earthquake 

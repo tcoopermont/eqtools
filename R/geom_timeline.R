@@ -77,8 +77,21 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #' @param mapping Set of aesthetic mappings created by ‘aes’. Can be inherited from 
 #'      upper levels of the plot.
 #'
-#' @param data: The data to be displayed in this layer. Can be NULL, data.frame or function
+#' @param data The data to be displayed in this layer. Can be NULL, data.frame or function
 #' 
+#' @param stat The statistical transformation to use on the data for this layer
+#' 
+#' @param position Position adjustment, either as a string, or the result of a
+#'          call to a position adjustment function.
+#'
+#' @param  na.rm If ‘FALSE’, the default, missing values are removed with a
+#'          warning. If ‘TRUE’, missing values are silently removed.
+#' @param show.legend logical. Should this layer be included in the legends?
+#'
+#' @param inherit.aes If ‘FALSE’, overrides the default aesthetics, rather than
+#'          combining with them. 
+#' @param ... other arguments passed on to ‘layer’.
+#'
 #' @details: aes parameters act similar to `geom_point`
 #'
 #'
