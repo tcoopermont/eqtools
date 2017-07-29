@@ -81,8 +81,6 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #' 
 #' @details: aes parameters act similar to `geom_point`
 #'
-#' @section Aesthetics:
-#' \aesthetics{geom}{timeline}
 #'
 #' @examples
 #' \dontrun{
