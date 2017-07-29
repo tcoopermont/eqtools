@@ -26,6 +26,8 @@ warning. If ‘TRUE’, missing values are silently removed.}
 
 \item{inherit.aes}{If ‘FALSE’, overrides the default aesthetics, rather than
 combining with them.}
+
+\item{...}{other arguments passed on to ‘layer’.}
 }
 \description{
 This function generates annotation to accompany `geom_timeline` plot objects.
