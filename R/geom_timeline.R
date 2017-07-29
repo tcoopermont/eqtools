@@ -34,7 +34,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
            #       xmax = rescale(xmax, from = panel_scales$x.range))
     #str(coords) 
     
-    datePoint = pointsGrob(
+    datePoint = grid::pointsGrob(
 	   x = coords$x,
            y = coords$y,
            pch = 19, size = unit(1,"char"),
@@ -46,11 +46,11 @@ draw_panel_function <- function(data, panel_scales, coord) {
     )
                   
     #this should only be drawn once - use "first" from pointsGlob                        
-    timeLine = segmentsGrob(coords$xmin,
+    timeLine = grid::segmentsGrob(coords$xmin,
                             coords$y,
                             coords$xmax,
                             coords$y)
-    gTree(children = gList(datePoint,timeLine))
+    grid::gTree(children = grid::gList(datePoint,timeLine))
     #timeLine 
 }
 #need to fix stroke
@@ -81,6 +81,9 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #' 
 #' @details: aes parameters act similar to `geom_point`
 #'
+#' @section Aesthetics:
+#' \aesthetics{geom}{timeline}
+#'
 #' @examples
 #' \dontrun{
 #' ggplot(quakesFiltered,aes(x = YEAR, y = 1,
@@ -95,7 +98,7 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 geom_timeline<- function(mapping = NULL, data = NULL, stat = "identity", 
                            position = "identity", show.legend = NA, 
                            na.rm = FALSE, inherit.aes = TRUE, ...) {
-        layer(
+        ggplot2::layer(
                 data = data, 
                 mapping = mapping,
                 stat = stat,

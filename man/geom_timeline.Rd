@@ -21,9 +21,13 @@ This function generates a timeline plot with years as y axis and individual eart
 \details{
 : aes parameters act similar to `geom_point`
 }
+\section{Aesthetics}{
+
+\aesthetics{geom}{timeline}
+}
+
 \examples{
 \dontrun{
-geom_timeline(
 ggplot(quakesFiltered,aes(x = YEAR, y = 1,
         xmin = minYear,xmax = maxYear,
         )) +

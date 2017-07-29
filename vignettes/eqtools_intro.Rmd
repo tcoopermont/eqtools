@@ -25,7 +25,8 @@ The entire dataset can be download by clicking on the link: "Download entire sig
 ### Data: NOAA significant earthquake data 
 
 ```{r, echo = TRUE, eval = TRUE, load_data}
-     eqdata <- readr::read_delim(  system.file("extdata",
+     library(readr)
+     eqdata <- read_delim(  system.file("extdata",
                           "signif-july-2017.txt.gz",
 			   package = "eqtools"),delim = "\t")
     dim(eqdata)
@@ -47,7 +48,7 @@ eq_clean_location removes country from LOCATION_NAME and converts it to title ca
 ```{r, echo = TRUE, eval = TRUE, clean_location}
     eqdata$LOCATION_NAME[1]
     eq_data_ready <- eq_clean_location(eq_data_clean)
-    eq_clean$LOCATION_NAME[1]
+    eq_data_ready$LOCATION_NAME[1]
 ```
 
 ### Plotting Tools
@@ -60,7 +61,7 @@ geom_timeline() creates a timeline plot of eathquakes by year
     library(grid)
     minYear <- 2000		  
     maxYear <- 2010		  
-    eq_us_mex_data <- dplyr::mutate(eq_data_ready) %>%
+    eq_us_mex_data <- mutate(eq_data_ready) %>%
           filter( YEAR >= minYear,YEAR <= maxYear, COUNTRY %in% c("USA","MEXICO")) %>%
 	  mutate(EQ_PRIMARY = as.numeric(EQ_PRIMARY))
      ggplot(eq_us_mex_data,aes(x = YEAR, y = 1,
@@ -72,11 +73,12 @@ geom_timeline() creates a timeline plot of eathquakes by year
 geom_timeline_label() adds labels to the geom_timeline plot
 
 ```{r, echo = TRUE, eval = TRUE, timeline_plot_annot}
+    #library(ggplot2)
      ggplot(eq_us_mex_data,aes(x = YEAR, y = 1,
          xmin = minYear,xmax = maxYear,
          )) +
   geom_timeline(aes(size = EQ_PRIMARY)) +
-  geom_timeline_label(aes(label = LOCATION_NAME,n_max = 10))
+  geom_timeline_label(aes(label = LOCATION_NAME),nmax = 10)
 ```
 
 ### Mapping Tools
@@ -85,14 +87,14 @@ eq_map creates a leaflet map
 ```{r, echo = TRUE, eval = TRUE, earthquake_map}
       library(leaflet)
       
-      eq_map(eq_us_mex_data,annot_col = "DATE")
+      #eq_map(eq_us_mex_data,annot_col = "DATE")
 
 ```
 
 eq_create_label() formats information to be used in a web popup
 
 ```{r, echo = TRUE, eval = TRUE, earthquake_labels}
-  popup_labels <- eq_create_label(adf) 
+  popup_labels <- eq_create_label(eq_us_mex_data) 
   paste(popup_labels[1],"\n")
 
 ```

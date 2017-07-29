@@ -12,7 +12,7 @@ geom_timeline_label(mapping = NULL, data = NULL, stat = "identity",
 \item{mapping}{Set of aesthetic mappings created by ‘aes’. Can be inherited from 
 upper levels of the plot.}
 
-\item{data:}{The data to be displayed in this layer. Can be NULL, data.frame or function}
+\item{data}{The data to be displayed in this layer. Can be NULL, data.frame or function}
 }
 \description{
 This function generates annotation to accompany `geom_timeline` plot objects.
@@ -20,7 +20,8 @@ This function generates annotation to accompany `geom_timeline` plot objects.
    line connection the name with the point is drawn.
 }
 \details{
-: aes parameters act similar to `geom_label`
+aes parameters act similar to `geom_label`
+    aes n_max max number of labels sorted by size
 }
 \examples{
 \dontrun{

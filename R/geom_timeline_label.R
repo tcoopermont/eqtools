@@ -2,6 +2,7 @@
 library(scales)
 library(ggplot2)
 library(grid)
+library(dplyr)
 #draw_panel_function_bak <- function(data, panel_scales, coord) {
 #        coords <- coord$transform(data, panel_scales) %>%
 #                mutate(lower = rescale(lower, from = panel_scales$y.range),
@@ -28,9 +29,9 @@ draw_panel_function <- function(data, panel_scales, coord) {
          # pull out the top n_max by magnitude - for annotation
 	 one_max <- data$n_max[1]
 	 if(!is.na(one_max)){
-             data <- mutate(data, size = as.numeric(size)) %>%
-	      arrange(size) %>%
-	      slice(1:one_max)
+             data <- dplyr::mutate_(data, size = ~ as.numeric(size)) %>%
+	      dplyr::arrange_(dplyr::desc(~ size)) %>%
+	      dplyr::slice(1:one_max)
 	         
 
 	 } 
@@ -41,10 +42,10 @@ draw_panel_function <- function(data, panel_scales, coord) {
          #str(coords) 
                        
          #should the length come in as a parameter?
-         connLine = segmentsGrob(coords$x,coords$y,coords$x,coords$y + 0.07)
-         labelTxt = textGrob(coords$label,coords$x,coords$y + 0.07,just="left",rot=45)
+         connLine = grid::segmentsGrob(coords$x,coords$y,coords$x,coords$y + 0.07)
+         labelTxt = grid::textGrob(coords$label,coords$x,coords$y + 0.07,just="left",rot=45)
          #timeLine = segmentsGrob(0.25,0.5,0.8,0.5)
-         gTree(children = gList(connLine,labelTxt))
+         grid::gTree(children = grid::gList(connLine,labelTxt))
          #timeLine 
 }
 #need to fix stroke
@@ -95,7 +96,7 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
 geom_timeline_label<- function(mapping = NULL, data = NULL, stat = "identity", 
                            position = "identity", show.legend = NA, 
                            na.rm = FALSE, inherit.aes = TRUE, ...) {
-        layer(
+        ggplot2::layer(
                 data = data, 
                 mapping = mapping,
                 stat = stat,
