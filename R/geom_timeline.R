@@ -36,8 +36,8 @@ draw_panel_function <- function(data, panel_scales, coord) {
     miny <- (min(coords$y))
     maxy <- (max(coords$y))
 
-    print(first)
-    print(paste("miny: ",miny))
+    #print(first)
+    #print(paste("miny: ",miny))
     ys <- unique(coords$y)
     start <- data.frame(x =first$xmin, y = ys, id = 1:NROW(ys))
     end <- data.frame(x =first$xmax,y = ys, id = 1:NROW(ys))
@@ -50,9 +50,10 @@ draw_panel_function <- function(data, panel_scales, coord) {
 
 GeomTimeline <- ggproto("GeomTimeline", Geom,
                          required_aes = c("x","y"),
-                         non_missing_aes = c("size", "shape", "colour"),
-                         default_aes = aes(shape = 19, size = 1.5,lwd = 2,colour = "black",
+                         #non_missing_aes = c("size", "shape", "colour"),
+                         default_aes = aes(shape = 19, lwd = 2,colour = "black",
                                            fill = "black",alpha = 0.5,stroke = 1),
+                                           #size = 1.5,
 
                          draw_key = draw_key_point,
                          #draw_key = function(data, params, size) 

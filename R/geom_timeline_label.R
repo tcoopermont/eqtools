@@ -9,8 +9,6 @@ draw_panel_function <- function(data, panel_scales, coord) {
          #str(panel_scales)
          # pull out the top n_max by magnitude - for annotation
 	 one_max <- data$n_max[1]
-         print(max(data$size))
-         print(min(data$size))
        
 	 if(!is.na(one_max)){
              data <- dplyr::mutate_(data, size = ~ as.numeric(size)) %>%
@@ -57,6 +55,7 @@ GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
 #' \item{ y: single integer or a factor. (points will be grouped by y) example: COUNTRY}
 #' \item{n_max: integer max number of labels sorted by size }
 #' \item{size: numeric data field to base limiting of number of labels }
+#' \item{label: character text to be diplayed over points }
 #'
 #' }
 #'
