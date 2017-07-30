@@ -2,26 +2,7 @@
 library(scales)
 library(ggplot2)
 library(grid)
-#draw_panel_function_bak <- function(data, panel_scales, coord) {
-#        coords <- coord$transform(data, panel_scales) %>%
-#                mutate(lower = rescale(lower, from = panel_scales$y.range),
-#                       upper = rescale(upper, from = panel_scales$y.range),
-#                       middle = rescale(middle, from = panel_scales$y.range))
-#        med <- pointsGrob(x = coords$x,
-#                          y = coords$middle,
-#                          pch = coords$shape)
-#        lower <- segmentsGrob(x0 = coords$x,
-#                              x1 = coords$x,
-#                              y0 = coords$ymin,
-#                              y1 = coords$lower,
-#                              gp = gpar(lwd = coords$size))
-#        upper <- segmentsGrob(x0 = coords$x,
-#                              x1 = coords$x,
-#                              y0 = coords$upper,
-#                              y1 = coords$ymax,
-#                              gp = gpar(lwd = coords$size))
-#        gTree(children = gList(med, lower, upper))
-#}
+
 draw_panel_function <- function(data, panel_scales, coord) {
     str(data)
     str(panel_scales)
