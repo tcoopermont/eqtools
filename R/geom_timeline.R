@@ -10,6 +10,10 @@ draw_panel_function <- function(data, panel_scales, coord) {
     #coords$data <- dplyr::mutate(coords$data,~ size = as.numeric(size))
     #try and filter the data by min/max year
     #coords <- data
+
+    #data <- dplyr::mutate(xmin =  as.Date(paste(xmin,"-12-31",sep=""),"%Y-%m-%d"),
+    #                      xmax =  as.Date(paste(xmax,"-12-31",sep=""),"%Y-%m-%d")
+    #                      )
     coords <- coord$transform(data, panel_scales) # %>%
            #mutate(size = rescale(size, from = panel_scales$y.range))
            #mutate(size = rescale(size, from = c(min(size),max(size))))
@@ -17,7 +21,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
     #str(coords) 
     
     datePoint = grid::pointsGrob(
-	   x = coords$x,
+    	   x = coords$x,
            y = coords$y,
            pch = 19, 
            #size = unit(coords$size,"char") ,
@@ -78,12 +82,21 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 #' @param ... other arguments passed on to ‘layer’.
 #'
 #' @details: aes parameters act similar to `geom_point`
+#' \itemize{
+#' \item{ x: a Date object}
+#' \item{ y: single integer or a factor. (points will be grouped by y) example: COUNTRY}
+#' \item{ xmin: Date example 1999-1-1}
+#' \item{ xmax: Date example 2015-12-31}
+#' \item{ size: numeric the data field to base size of point on}
+#'
+#' }
 #'
 #'
 #' @examples
 #' \dontrun{
-#' ggplot(quakesFiltered,aes(x = YEAR, y = 1,
-#'         xmin = minYear,xmax = maxYear,
+#' ggplot(quakesFiltered,aes(x = DATE, y = COUNTRY,
+#'         xmin = as.Date("2000-1-1","%Y-%m-%d"),
+#'         xmax = as.Date("2015-12-31","%Y-%m-%d"),
 #'         )) +
 #'  geom_timeline(aes(size = EQ_PRIMARY))
 #' }

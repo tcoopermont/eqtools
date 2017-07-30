@@ -36,12 +36,21 @@ This function generates annotation to accompany `geom_timeline` plot objects.
 }
 \details{
 aes parameters act similar to `geom_label`
-    aes n_max max number of labels sorted by size
+    aes 
+\itemize{
+\item{ x: a Date object}
+\item{ y: single integer or a factor. (points will be grouped by y) example: COUNTRY}
+\item{n_max: integer max number of labels sorted by size }
+\item{size: numeric data field to base limiting of number of labels }
+
+}
 }
 \examples{
 \dontrun{
-ggplot(quakesFiltered,aes(x = YEAR, y = 1,
-        xmin = minYear,xmax = maxYear)) +
+ggplot(quakesFiltered,aes(x = DATE, y = COUNTRY,
+        xmin = as.Date("2000-1-1","\%Y-\%m-\%d"),
+        xmax = as.Date("2015-12-31","\%Y-\%m-\%d"),
+        )) +
  geom_timeline(aes(size = EQ_PRIMARY)) +
  geom_timeline_label(aes(size = EQ_PRIMARY)) +
 }

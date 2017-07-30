@@ -59,13 +59,13 @@ geom_timeline() creates a timeline plot of eathquakes by year
     library(dplyr)
     library(ggplot2)
     library(grid)
-    minYear <- 2000		  
-    maxYear <- 2010		  
+    minDate <- as.Date("2000-1-1","%Y-%m-%d")	  
+    maxDate <- as.Date("2015-12-31","%Y-%m-%d")	  
     eq_us_mex_data <- mutate(eq_data_ready) %>%
-          filter( YEAR >= minYear,YEAR <= maxYear, COUNTRY %in% c("USA","MEXICO")) %>%
+          filter( DATE >= minDate,DATE <= maxDate, COUNTRY %in% c("USA","MEXICO")) %>%
 	  mutate(EQ_PRIMARY = as.numeric(EQ_PRIMARY))
-     ggplot(eq_us_mex_data,aes(x = YEAR, y = 1,
-         xmin = minYear,xmax = maxYear,
+     ggplot(eq_us_mex_data,aes(x = DATE, y = 1,
+         xmin = minDate,xmax = maxDate,
          )) +
   geom_timeline(aes(size = EQ_PRIMARY))
 ```
@@ -74,11 +74,11 @@ geom_timeline_label() adds labels to the geom_timeline plot
 
 ```{r, echo = TRUE, eval = TRUE, timeline_plot_annot}
     #library(ggplot2)
-     ggplot(eq_us_mex_data,aes(x = YEAR, y = 1,
-         xmin = minYear,xmax = maxYear,
+     ggplot(eq_us_mex_data,aes(x = DATE, y = 1,
+         xmin = minDate,xmax = maxDate,
          )) +
   geom_timeline(aes(size = EQ_PRIMARY)) +
-  geom_timeline_label(aes(label = LOCATION_NAME,n_max = 3))
+  geom_timeline_label(aes(label = LOCATION_NAME,n_max = 5))
 ```
 
 ### Mapping Tools
