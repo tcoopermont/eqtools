@@ -29,8 +29,9 @@ draw_panel_function <- function(data, panel_scales, coord) {
     #coords$data <- dplyr::mutate(coords$data,~ size = as.numeric(size))
     #try and filter the data by min/max year
     #coords <- data
-    coords <- coord$transform(data, panel_scales) %>%
-           mutate(size = rescale(size, from = panel_scales$y.range))
+    coords <- coord$transform(data, panel_scales) # %>%
+           #mutate(size = rescale(size, from = panel_scales$y.range))
+           #mutate(size = rescale(size, from = c(min(size),max(size))))
            #       xmax = rescale(xmax, from = panel_scales$x.range))
     str(coords) 
     
@@ -38,13 +39,12 @@ draw_panel_function <- function(data, panel_scales, coord) {
 	   x = coords$x,
            y = coords$y,
            pch = 19, 
-           size = unit(coords$size,"char") 
-           ,
+           #size = unit(coords$size,"char") ,
         #need to change this to defaults
           gp = gpar(col = alpha(coords$colour, coords$alpha), 
    	            fill = alpha(coords$fill, coords$alpha), 
-   	            #fontsize  = coords$size * .pt + coords$stroke * .stroke/2   , 
-                    fontsize = 4,
+   	            fontsize  = coords$size * .pt + coords$stroke * .stroke/2   , 
+                    #fontsize = 20,
                     lwd = coords$stroke * .stroke/2)
     )
     first <- coords[1,]
@@ -60,7 +60,8 @@ draw_panel_function <- function(data, panel_scales, coord) {
 #need to fix stroke
 GeomTimeline <- ggproto("GeomTimeline", Geom,
                          required_aes = c("x","y"),
-                         default_aes = aes(shape = 19, lwd = 2,colour = "black",
+                         non_missing_aes = c("size", "shape", "colour"),
+                         default_aes = aes(shape = 19, size = 1.5,lwd = 2,colour = "black",
                                            fill = "black",alpha = 0.5,stroke = 1),
 
                          draw_key = draw_key_point,
