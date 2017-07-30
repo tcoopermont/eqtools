@@ -4,8 +4,8 @@ library(ggplot2)
 library(grid)
 
 draw_panel_function <- function(data, panel_scales, coord) {
-    str(data)
-    str(panel_scales)
+    #str(data)
+    #str(panel_scales)
     #getting warning: "Using size for a discrete variable is not advised "
     #coords$data <- dplyr::mutate(coords$data,~ size = as.numeric(size))
     #try and filter the data by min/max year
@@ -14,7 +14,7 @@ draw_panel_function <- function(data, panel_scales, coord) {
            #mutate(size = rescale(size, from = panel_scales$y.range))
            #mutate(size = rescale(size, from = c(min(size),max(size))))
            #       xmax = rescale(xmax, from = panel_scales$x.range))
-    str(coords) 
+    #str(coords) 
     
     datePoint = grid::pointsGrob(
 	   x = coords$x,
@@ -38,17 +38,12 @@ draw_panel_function <- function(data, panel_scales, coord) {
     start <- data.frame(x =first$xmin, y = ys, id = 1:NROW(ys))
     end <- data.frame(x =first$xmax,y = ys, id = 1:NROW(ys))
     path <- rbind(start,end)
-    print(path)
-    #this should only be drawn once - use "first" from pointsGlob                        
-    #timeLine = grid::segmentsGrob(first$xmin,
-    #                        miny,
-    #                        first$xmax,
-    #                        miny)
+    #print(path)
     timeLine <- grid::polylineGrob(x = path$x,y = path$y,id = path$id,default.units = "native")
     grid::gTree(children = grid::gList(datePoint,timeLine))
     #timeLine 
 }
-#need to fix stroke
+
 GeomTimeline <- ggproto("GeomTimeline", Geom,
                          required_aes = c("x","y"),
                          non_missing_aes = c("size", "shape", "colour"),
@@ -57,12 +52,6 @@ GeomTimeline <- ggproto("GeomTimeline", Geom,
 
                          draw_key = draw_key_point,
                          #draw_key = function(data, params, size) 
-#{
-#    #browser()
-#    pointsGrob(0.5, 0.5, pch = data$shape, gp = gpar(col = alpha("blue", 
-#        0.9), fill = alpha("blue",0.9), fontsize = data$size * 
-#        .pt, lwd = 2))
-#},
                          draw_panel = draw_panel_function
                          )
 #' geom_timeline
