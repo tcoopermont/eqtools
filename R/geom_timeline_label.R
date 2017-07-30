@@ -33,20 +33,12 @@ draw_panel_function <- function(data, panel_scales, coord) {
          grid::gTree(children = grid::gList(connLine,labelTxt))
          #timeLine 
 }
-#need to fix stroke
 GeomTimelineLabel <- ggproto("GeomTimelineLabel", Geom,
                          required_aes = c("x","label"),
                          default_aes = aes(shape = 19, lwd = 2,colour = "black",
                                            fill = "black",alpha = 0.9,stroke = 1,n_max = NA),
 
                          draw_key = draw_key_point,
-                         #draw_key = function(data, params, size) 
-#{
-#    #browser()
-#    pointsGrob(0.5, 0.5, pch = data$shape, gp = gpar(col = alpha("blue", 
-#        0.9), fill = alpha("blue",0.9), fontsize = data$size * 
-#        .pt, lwd = 2))
-#},
                          draw_panel = draw_panel_function
                          )
 
