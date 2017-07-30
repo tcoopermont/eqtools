@@ -42,6 +42,7 @@ aes parameters act similar to `geom_label`
 \item{ y: single integer or a factor. (points will be grouped by y) example: COUNTRY}
 \item{n_max: integer max number of labels sorted by size }
 \item{size: numeric data field to base limiting of number of labels }
+\item{label: character text to be diplayed over points }
 
 }
 }
