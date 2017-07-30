@@ -48,14 +48,24 @@ draw_panel_function <- function(data, panel_scales, coord) {
                     lwd = coords$stroke * .stroke/2)
     )
     first <- coords[1,]
+    miny <- (min(coords$y))
+    maxy <- (max(coords$y))
+
     print(first)
+    print(paste("miny: ",miny))
+    ys <- unique(coords$y)
+    start <- data.frame(x =first$xmin, y = ys, id = 1:NROW(ys))
+    end <- data.frame(x =first$xmax,y = ys, id = 1:NROW(ys))
+    path <- rbind(start,end)
+    print(path)
     #this should only be drawn once - use "first" from pointsGlob                        
-    timeLine = grid::segmentsGrob(first$xmin,
-                            first$y,
-                            first$xmax,
-                            first$y)
+    #timeLine = grid::segmentsGrob(first$xmin,
+    #                        miny,
+    #                        first$xmax,
+    #                        miny)
+    timeLine <- grid::polylineGrob(x = path$x,y = path$y,id = path$id,default.units = "native")
     grid::gTree(children = grid::gList(datePoint,timeLine))
-    #datePoint 
+    #timeLine 
 }
 #need to fix stroke
 GeomTimeline <- ggproto("GeomTimeline", Geom,
