@@ -8,6 +8,10 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 7, fig.align = "center")
+```
+## Earthquake Tools Package - eqtools 
 
 The eqtools package makes it easy for  users to explore the  U.S. National Oceanographic and Atmospheric Administration (NOAA) dataset on significant earthquakes around the world. This dataset contains information about 5,933 earthquakes over an approximately 4,000 year time span.
 
@@ -78,9 +82,22 @@ geom_timeline_label() adds labels to the geom_timeline plot
          xmin = minDate,xmax = maxDate,
          )) +
   geom_timeline(aes(size = EQ_PRIMARY)) +
-  geom_timeline_label(aes(label = LOCATION_NAME,n_max = 5))
+  geom_timeline_label(aes(label = LOCATION_NAME,size = EQ_PRIMARY,n_max = 5))
 ```
 
+If `y` is set to a data column the timelines are split up.
+xlim and ylim can be added to adjust for labels.
+
+```{r, echo = TRUE, eval = TRUE, timeline_plot_annot_split}
+    #library(ggplot2)
+     ggplot(eq_us_mex_data,aes(x = DATE, y = COUNTRY,
+         xmin = minDate,xmax = maxDate,
+         )) +
+  geom_timeline(aes(size = EQ_PRIMARY)) +
+  geom_timeline_label(aes(label = LOCATION_NAME,size = EQ_PRIMARY,n_max = 5)) + 
+  xlim(as.Date("1999-1-1","%Y-%m-%d"),as.Date("2017-12-31","%Y-%m-%d")	) + 
+  ylim(c(as.character(unique(eq_us_mex_data$COUNTRY)),""))
+```
 ### Mapping Tools
 
 eq_map creates a leaflet map
