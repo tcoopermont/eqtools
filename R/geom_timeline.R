@@ -23,35 +23,39 @@ library(grid)
 #        gTree(children = gList(med, lower, upper))
 #}
 draw_panel_function <- function(data, panel_scales, coord) {
-    #str(data)
-    #str(panel_scales)
+    str(data)
+    str(panel_scales)
     #getting warning: "Using size for a discrete variable is not advised "
     #coords$data <- dplyr::mutate(coords$data,~ size = as.numeric(size))
     #try and filter the data by min/max year
-    coords <- coord$data
-    coords <- coord$transform(data, panel_scales) #%>%
-           #mutate(xmin = rescale(xmin, from = panel_scales$x.range),
+    #coords <- data
+    coords <- coord$transform(data, panel_scales) %>%
+           mutate(size = rescale(size, from = panel_scales$y.range))
            #       xmax = rescale(xmax, from = panel_scales$x.range))
-    #str(coords) 
+    str(coords) 
     
     datePoint = grid::pointsGrob(
 	   x = coords$x,
            y = coords$y,
-           pch = 19, size = unit(1,"char"),
+           pch = 19, 
+           size = unit(coords$size,"char") 
+           ,
         #need to change this to defaults
           gp = gpar(col = alpha(coords$colour, coords$alpha), 
    	            fill = alpha(coords$fill, coords$alpha), 
-   	            fontsize = coords$size * .pt  , 
-                    lwd = coords$lwd)
+   	            #fontsize  = coords$size * .pt + coords$stroke * .stroke/2   , 
+                    fontsize = 4,
+                    lwd = coords$stroke * .stroke/2)
     )
-                  
+    first <- coords[1,]
+    print(first)
     #this should only be drawn once - use "first" from pointsGlob                        
-    timeLine = grid::segmentsGrob(coords$xmin,
-                            coords$y,
-                            coords$xmax,
-                            coords$y)
+    timeLine = grid::segmentsGrob(first$xmin,
+                            first$y,
+                            first$xmax,
+                            first$y)
     grid::gTree(children = grid::gList(datePoint,timeLine))
-    #timeLine 
+    #datePoint 
 }
 #need to fix stroke
 GeomTimeline <- ggproto("GeomTimeline", Geom,

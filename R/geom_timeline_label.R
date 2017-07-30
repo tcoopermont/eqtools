@@ -28,13 +28,17 @@ draw_panel_function <- function(data, panel_scales, coord) {
          #str(panel_scales)
          # pull out the top n_max by magnitude - for annotation
 	 one_max <- data$n_max[1]
+         print(max(data$size))
+         print(min(data$size))
+       
 	 if(!is.na(one_max)){
              data <- dplyr::mutate_(data, size = ~ as.numeric(size)) %>%
-	      dplyr::arrange_(dplyr::desc(~ size)) %>%
+	      dplyr::arrange_(~ dplyr::desc(size)) %>%
 	      dplyr::slice(1:one_max)
 	         
 
 	 } 
+         #str(data)
          coords <- coord$data
          coords <- coord$transform(data, panel_scales) #%>%
                 #mutate(xmin = rescale(xmin, from = panel_scales$x.range),

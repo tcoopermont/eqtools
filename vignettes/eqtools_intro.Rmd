@@ -78,7 +78,7 @@ geom_timeline_label() adds labels to the geom_timeline plot
          xmin = minYear,xmax = maxYear,
          )) +
   geom_timeline(aes(size = EQ_PRIMARY)) +
-  geom_timeline_label(aes(label = LOCATION_NAME),nmax = 10)
+  geom_timeline_label(aes(label = LOCATION_NAME,n_max = 3))
 ```
 
 ### Mapping Tools
