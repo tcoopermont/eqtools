@@ -176,7 +176,7 @@ eq_map creates a leaflet map
 ```r
       library(leaflet)
       
-      #eq_map(eq_us_mex_data,annot_col = "DATE")
+      #eq_map(eq_us_mex_data,annot_col = eq_us_mex_data$DATE)
 ```
 
 eq_create_label() formats information to be used in a web popup
@@ -186,6 +186,13 @@ eq_create_label() formats information to be used in a web popup
   popup_labels <- eq_create_label(eq_us_mex_data) 
   paste(popup_labels[1],"\n")
 #> [1] "<b>Location</b> Napa <br /> <b>Magnitude:</b> 5 <br /> <b>Total deaths:</b> NA <br /> \n"
+```
+
+Add the labels to the map
+
+```r
+  #eq_data_pop <- mutate_(eq_us_mex_data,pop = ~ popup_labels)
+  #eq_map(eq_us_mex_data,annot_col = eq_us_mex_data$pop)
 ```
 
 
