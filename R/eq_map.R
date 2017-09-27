@@ -25,7 +25,7 @@ leaflet::leaflet() %>% leaflet::addTiles( urlTemplate = "http://{s}.tile.openstr
                  radius = ~ EQ_PRIMARY,
                  weight = 1,
                  lng = ~ LONGITUDE,
-                 lat = ~ LATITUDE,popup = ~ date)
+                 lat = ~ LATITUDE,popup = ~ paste(DATE))
 
 }
 
