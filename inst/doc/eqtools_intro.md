@@ -191,7 +191,7 @@ eq_create_label() formats information to be used in a web popup
 Add the labels to the map
 
 ```r
-  #eq_data_pop <- mutate_(eq_us_mex_data,pop = ~ popup_labels)
+  #eq_us_mex_data <- mutate_(eq_us_mex_data,pop = ~ popup_labels)
   #eq_map(eq_us_mex_data,annot_col = eq_us_mex_data$pop)
 ```
 
